@@ -34,9 +34,3 @@ class TaskAggregateState: AggregateState<UUID, TaskAggregate> {
         updatedAt = createdAt
     }
 }
-
-data class TaskEntity(
-        val id: UUID = UUID.randomUUID(),
-        val name: String,
-        val tagsAssigned: MutableSet<UUID>
-)

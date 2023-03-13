@@ -17,7 +17,7 @@ class TaskCreatedEvent(
         val taskId: UUID,
         val taskName: String,
         createdAt: Long = System.currentTimeMillis(),
-) : Event<ProjectAggregate>(
+) : Event<TaskAggregate>(
         name = TASK_CREATED_EVENT,
         createdAt = createdAt
 )
@@ -27,7 +27,7 @@ class ExecutorAddedEvent(
         val taskId: UUID,
         val executorName: String,
         createdAt: Long = System.currentTimeMillis(),
-) : Event<ProjectAggregate>(
+) : Event<TaskAggregate>(
         name = EXECUTOR_ADDED_EVENT,
         createdAt = createdAt,
 )
@@ -37,7 +37,7 @@ class ExecutorDeletedEvent(
         val taskId: UUID,
         val executorName: String,
         createdAt: Long = System.currentTimeMillis(),
-) : Event<ProjectAggregate>(
+) : Event<TaskAggregate>(
         name = EXECUTOR_DELETED_EVENT,
         createdAt = createdAt,
 )
@@ -47,7 +47,7 @@ class TaskRenamedEvent(
         val taskId: UUID,
         val taskName: String,
         createdAt: Long = System.currentTimeMillis(),
-) : Event<ProjectAggregate>(
+) : Event<TaskAggregate>(
         name = TASK_RENAMED_EVENT,
         createdAt = createdAt,
 )
@@ -57,7 +57,7 @@ class StatusSetEvent(
         val taskId: UUID,
         val status: StatusEntity,
         createdAt: Long = System.currentTimeMillis(),
-) : Event<ProjectAggregate>(
+) : Event<TaskAggregate>(
         name = STATUS_SET_EVENT,
         createdAt = createdAt,
 )

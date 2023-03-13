@@ -2,7 +2,6 @@ package ru.quipy.api
 
 import ru.quipy.core.annotations.DomainEvent
 import ru.quipy.domain.Event
-import ru.quipy.logic.TaskEntity
 import java.util.*
 
 const val PROJECT_CREATED_EVENT = "PROJECT_CREATED_EVENT"
@@ -40,7 +39,7 @@ class StatusCreatedEvent(
         val statusName: String,
         val color: String,
         createdAt: Long = System.currentTimeMillis(),
-) : Event<TaskAggregate>(
+) : Event<ProjectAggregate>(
         name = STATUS_CREATED_EVENT,
         createdAt = createdAt,
 )
@@ -51,7 +50,7 @@ class StatusDeletedEvent(
         val statusName: String,
         val color: String,
         createdAt: Long = System.currentTimeMillis(),
-) : Event<TaskAggregate>(
+) : Event<ProjectAggregate>(
         name = STATUS_DELETED_EVENT,
         createdAt = createdAt,
 )
