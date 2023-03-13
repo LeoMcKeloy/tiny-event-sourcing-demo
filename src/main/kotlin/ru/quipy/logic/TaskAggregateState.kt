@@ -16,12 +16,6 @@ class TaskAggregateState: AggregateState<UUID, TaskAggregate> {
 
     override fun getId() = taskId
 
-//    @StateTransitionFunc
-//    fun statusCreatedApply(event: StatusCreatedEvent) {
-//        status = StatusEntity(event.statusId, event.statusName, event.color)
-//        updatedAt = createdAt
-//    }
-
     @StateTransitionFunc
     fun statusSetApply(event: StatusSetEvent) {
         status = event.status
@@ -40,3 +34,9 @@ class TaskAggregateState: AggregateState<UUID, TaskAggregate> {
         updatedAt = createdAt
     }
 }
+
+data class TaskEntity(
+        val id: UUID = UUID.randomUUID(),
+        val name: String,
+        val tagsAssigned: MutableSet<UUID>
+)
