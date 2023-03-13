@@ -24,7 +24,7 @@ class ProjectController(
         return projectEsService.update(projectId) { it.createStatus(name, color) }
     }
 
-    @PutMapping("/{projectId}/status")
+    @PutMapping("/{projectId}/status/delete")
     fun deleteStatus(@PathVariable projectId: UUID,
                      @RequestParam name: String,
                      @RequestParam color: String) : StatusDeletedEvent {
@@ -34,5 +34,23 @@ class ProjectController(
     @GetMapping("/{projectId}")
     fun getAccount(@PathVariable projectId: UUID) : ProjectAggregateState? {
         return projectEsService.getState(projectId)
+    }
+
+    @PutMapping("/{projectId}/{id}")
+    fun addMember(@PathVariable projectId: UUID,
+                    @PathVariable id: UUID) : MemberAddedEvent {
+        return projectEsService.update(projectId) { it.addMember(id) }
+    }
+
+    @PutMapping("/{projectId}/{id}/delete")
+    fun deleteMember(@PathVariable projectId: UUID,
+                       @PathVariable id: UUID) : MemberDeletedEvent {
+        return projectEsService.update(projectId) { it.deleteMember(id) }
+    }
+
+    @PutMapping("/{projectId}/{projectTitle}")
+    fun renameProject(@PathVariable projectId: UUID,
+                      @PathVariable projectTitle: String) : ProjectRenamedEvent {
+        return projectEsService.update(projectId) { it.renameProject(projectTitle) }
     }
 }
