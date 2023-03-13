@@ -17,6 +17,13 @@ class TaskAggregateState: AggregateState<UUID, TaskAggregate> {
     override fun getId() = taskId
 
     @StateTransitionFunc
+    fun taskCreatedApply(event: TaskCreatedEvent) {
+        taskId = event.taskId
+        taskName = event.taskName
+        updatedAt = createdAt
+    }
+
+    @StateTransitionFunc
     fun statusSetApply(event: StatusSetEvent) {
         status = event.status
         updatedAt = createdAt
@@ -25,6 +32,12 @@ class TaskAggregateState: AggregateState<UUID, TaskAggregate> {
     @StateTransitionFunc
     fun executorAddedApply(event: ExecutorAddedEvent) {
         executors.add(event.executorName)
+        updatedAt = createdAt
+    }
+
+    @StateTransitionFunc
+    fun executorDeletedApply(event: ExecutorDeletedEvent) {
+        executors.remove(event.executorName)
         updatedAt = createdAt
     }
 

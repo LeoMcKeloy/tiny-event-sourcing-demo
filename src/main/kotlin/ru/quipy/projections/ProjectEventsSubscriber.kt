@@ -24,8 +24,24 @@ class ProjectEventsSubscriber {
                 logger.info("Project created: {}", event.title)
             }
 
+            `when`(ProjectRenamedEvent::class) { event ->
+                logger.info("Project renamed: {}", event.title)
+            }
+
             `when`(StatusCreatedEvent::class) { event ->
                 logger.info("Status created: {}", event.statusName)
+            }
+
+            `when`(StatusDeletedEvent::class) { event ->
+                logger.info("Status deleted: {}", event.statusName)
+            }
+
+            `when`(MemberAddedEvent::class) { event ->
+                logger.info("Member created: {}", event.memberId)
+            }
+
+            `when`(MemberDeletedEvent::class) { event ->
+                logger.info("Member deleted: {}", event.memberId)
             }
         }
     }
