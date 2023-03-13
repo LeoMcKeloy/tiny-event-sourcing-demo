@@ -14,7 +14,7 @@ class TaskController(
 
     @PostMapping("/{taskName}")
     fun createTask(@PathVariable name: String) : TaskCreatedEvent {
-        return taskEsService.create { it.create(UUID.randomUUID(), name) }
+        return taskEsService.create { it.create(name) }
     }
 
     @PutMapping("/{taskId}")
