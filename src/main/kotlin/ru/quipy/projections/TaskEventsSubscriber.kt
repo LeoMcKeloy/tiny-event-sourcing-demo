@@ -5,11 +5,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import ru.quipy.api.*
-import ru.quipy.core.annotations.DomainEvent
-import ru.quipy.domain.Event
-import ru.quipy.logic.StatusEntity
 import ru.quipy.streams.AggregateSubscriptionsManager
-import java.util.*
 import javax.annotation.PostConstruct
 
 @Service
@@ -40,7 +36,7 @@ class TaskEventsSubscriber {
             }
 
             `when`(StatusSetEvent::class) { event ->
-                logger.info("Task created: {}", event.status.name)
+                logger.info("Task created: {}", event.nameStatus)
             }
         }
     }

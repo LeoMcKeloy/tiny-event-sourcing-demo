@@ -15,6 +15,7 @@ const val STATUS_SET_EVENT = "STATUS_SET_EVENT"
 @DomainEvent(name = TASK_CREATED_EVENT)
 class TaskCreatedEvent(
         val taskId: UUID,
+        val projectId: UUID,
         val taskName: String,
         createdAt: Long = System.currentTimeMillis(),
 ) : Event<TaskAggregate>(
@@ -55,7 +56,8 @@ class TaskRenamedEvent(
 @DomainEvent(name = STATUS_SET_EVENT)
 class StatusSetEvent(
         val taskId: UUID,
-        val status: StatusEntity,
+        val nameStatus: String,
+        val colorStatus: String,
         createdAt: Long = System.currentTimeMillis(),
 ) : Event<TaskAggregate>(
         name = STATUS_SET_EVENT,

@@ -12,9 +12,10 @@ class TaskController(
         val taskEsService: EventSourcingService<UUID, TaskAggregate, TaskAggregateState>
 ) {
 
-    @PostMapping("/{taskName}")
-    fun createTask(@PathVariable name: String) : TaskCreatedEvent {
-        return taskEsService.create { it.create(name) }
+    @PostMapping("/{taskName}/{projectId}")
+    fun createTask(@PathVariable taskName: String,
+                   @PathVariable projectId: UUID) : TaskCreatedEvent {
+        return taskEsService.create { it.create(taskName, projectId) }
     }
 
     @PutMapping("/{taskId}")

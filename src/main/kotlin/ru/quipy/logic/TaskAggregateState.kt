@@ -7,6 +7,7 @@ import java.util.*
 
 class TaskAggregateState: AggregateState<UUID, TaskAggregate> {
     private lateinit var taskId: UUID
+    private lateinit var projectId: UUID
     var createdAt: Long = System.currentTimeMillis()
     var updatedAt: Long = System.currentTimeMillis()
 
@@ -19,13 +20,14 @@ class TaskAggregateState: AggregateState<UUID, TaskAggregate> {
     @StateTransitionFunc
     fun taskCreatedApply(event: TaskCreatedEvent) {
         taskId = event.taskId
+        projectId = event.projectId
         taskName = event.taskName
         updatedAt = createdAt
     }
 
     @StateTransitionFunc
     fun statusSetApply(event: StatusSetEvent) {
-        status = event.status
+        status = StatusEntity(event.nameStatus, event.colorStatus)
         updatedAt = createdAt
     }
 

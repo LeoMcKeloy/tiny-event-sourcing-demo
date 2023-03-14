@@ -37,6 +37,6 @@ class AnnotationBasedTaskEventsSubscriber {
 
     @SubscribeEvent
     fun statusSetSubscriber(event: StatusSetEvent) {
-        logger.info("Status set: {}", event.status.name)
+        logger.info("Status set: {}", event.nameStatus)
     }
 }

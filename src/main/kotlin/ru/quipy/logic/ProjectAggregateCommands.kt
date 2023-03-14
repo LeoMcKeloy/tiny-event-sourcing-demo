@@ -16,6 +16,9 @@ fun ProjectAggregateState.create(id: UUID, title: String, creatorId: String): Pr
 }
 
 fun ProjectAggregateState.createStatus(name: String, color: String): StatusCreatedEvent {
+    if (statuses.contains(StatusEntity(name, color))) {
+        throw IllegalArgumentException("Status already exists: $name")
+    }
     return StatusCreatedEvent(projectId = this.getId(), statusName = name, color = color)
 }
 

@@ -3,12 +3,12 @@ package ru.quipy.logic
 import ru.quipy.api.*
 import java.util.*
 
-fun TaskAggregateState.create(name: String): TaskCreatedEvent {
-    return TaskCreatedEvent(taskId = UUID.randomUUID(), taskName = name)
+fun TaskAggregateState.create(name: String, projectId: UUID): TaskCreatedEvent {
+    return TaskCreatedEvent(taskId = UUID.randomUUID(), projectId = projectId, taskName = name)
 }
 
 fun TaskAggregateState.setStatus(status: StatusEntity): StatusSetEvent {
-    return StatusSetEvent(taskId = this.getId(), status = status)
+    return StatusSetEvent(taskId = this.getId(), nameStatus = status.name, colorStatus = status.color)
 }
 
 fun TaskAggregateState.addExecutor(name: String): ExecutorAddedEvent {
